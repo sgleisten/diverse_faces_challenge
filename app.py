@@ -1,10 +1,11 @@
-\from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, render_template, jsonify
 import openai
+import os
 
 app = Flask(__name__)
 
-# Replace 'your_api_key_here' with your actual OpenAI API key
-openai.api_key = 'sk-7WRKdAUdse02Cbb7l_FvWug9Wn1BySlhIC-fS_xcm6T3BlbkFJu0UqC9hvgG6qAZat9t1K-fgKcrQlQRmt2phhJS_RIA'
+# Get the OpenAI API key from environment variables
+openai.api_key = os.getenv('sk-7WRKdAUdse02Cbb7l_FvWug9Wn1BySlhIC-fS_xcm6T3BlbkFJu0UqC9hvgG6qAZat9t1K-fgKcrQlQRmt2phhJS_RIA')
 
 def generate_image(prompt):
     response = openai.Image.create(
