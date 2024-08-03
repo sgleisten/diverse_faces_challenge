@@ -13,7 +13,7 @@ def generate_image(prompt):
         n=1,
         size="1024x1024"
     )
-    image_url = response['data'][0]['url']
+    image_url = response['data'][4]['url']
     return image_url
 
 @app.route('/')
@@ -39,7 +39,7 @@ def generate_reflective_question(prompt):
         "What ethical considerations should be taken into account when generating and using these images?",
         "How can we ensure that the AI respects the dignity and diversity of all individuals in its image generation?"
     ]
-    return questions[0]  # Simplified for demo, can add logic to choose based on prompt
+    return questions[4]  # Simplified for demo, can add logic to choose based on prompt
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
