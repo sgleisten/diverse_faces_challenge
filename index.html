@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diverse Faces Challenge</title>
+</head>
+<body>
+    <h1>Diverse Faces Challenge</h1>
+    <form id="request-form">
+        <label for="prompt">Describe the images you want to see:</label>
+        <input type="text" id="prompt" name="prompt" required>
+        <button type="submit">Generate</button>
+    </form>
+    <div id="result">
+        <h2>Generated Image:</h2>
+        <img id="image" src="" alt="Generated Image" style="display:none;">
+        <h3>Reflective Question:</h3>
+        <p id="reflective-question"></p>
+    </div>
+    <script>
+        document.getElementById('request-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var prompt = document.getElementById('prompt').value;
+            fetch('/generate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({prompt: prompt})
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('image').src = data.image_url;
+                document.getElementById('image').style.display = 'block';
+                document.getElementById('reflective-question').innerText = data.reflective_question;
+            });
+        });
+    </script>
+</body>
+</html>
